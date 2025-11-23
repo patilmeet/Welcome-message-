@@ -1,0 +1,139 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WELCOME TO MEET PATIL</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1: #0f172a; /* navy */
+      --bg2: #081129; /* deep */
+      --accent: #7c3aed; /* purple */
+      --glass: rgba(255,255,255,0.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#fff}.wrap{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:40px;
+}
+
+.card{
+  width:100%;
+  max-width:980px;
+  border-radius:20px;
+  padding:30px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  box-shadow:0 10px 30px rgba(2,6,23,0.6);
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap:28px;
+  align-items:center;
+  backdrop-filter: blur(6px) saturate(140%);
+}
+
+.left{
+  padding:10px 20px;
+}
+
+h1{
+  margin:0 0 14px 0;
+  font-size:clamp(32px,6vw,54px);
+  line-height:1.02;
+  font-weight:800;
+  letter-spacing:1px;
+  background:linear-gradient(90deg,#fff 0%, #f0f3ff 30%, var(--accent) 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  filter:drop-shadow(0 6px 18px rgba(124,58,237,0.2));
+  transform-origin:left;
+  animation: floatText 2.8s ease-in-out infinite;
+}
+
+@keyframes floatText{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+
+p.lead{
+  margin:0 0 20px 0;
+  color:rgba(255,255,255,0.85);
+  font-weight:600;
+  opacity:0.95;
+}
+
+.btn-row{display:flex;gap:12px;align-items:center}
+.btn{
+  border:0;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;background:linear-gradient(90deg,var(--accent),#4f46e5);color:white;box-shadow:0 6px 18px rgba(79,70,229,0.18);
+}
+
+.meta{font-size:13px;color:rgba(255,255,255,0.6);margin-top:12px}
+
+.image-wrap{
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;
+}
+
+.photo{
+  width:360px;max-width:100%;height:auto;border-radius:16px;overflow:hidden;box-shadow:0 18px 50px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.06);
+  transform:translateY(0);transition:transform .45s cubic-bezier(.2,.9,.2,1);
+}
+.photo:hover{transform:translateY(-8px) scale(1.02)}
+
+.credit{font-size:12px;color:rgba(255,255,255,0.6)}
+
+/* responsive */
+@media (max-width:880px){
+  .card{grid-template-columns:1fr; padding:20px}
+  .image-wrap{order:-1}
+}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="left">
+        <h1>WELCOME TO MEET PATIL</h1>
+        <p class="lead">A modern, minimal intro page built just for you — responsive, stylish, and ready to customise.</p>
+        <div class="btn-row">
+          <button class="btn" onclick="copyText()">Copy Greeting</button>
+          <a class="btn" href="#photo" style="text-decoration:none;display:inline-flex;align-items:center;">View Photo</a>
+        </div>
+        <div class="meta">Tip: Replace the image URL in the HTML with any image you like. The page uses the image URL you provided.</div>
+      </div><div class="image-wrap">
+    <!-- Image source uses the exact URL you gave. If it doesn't display, open the image link below. -->
+    <img id="photo" class="photo" src="https://ibb.co/60p97Fpj" alt="Meet Patil image" onerror="imgFallback(this)">
+    <div class="credit">Image source: <a href="https://ibb.co/60p97Fpj" target="_blank" style="color:inherit;opacity:0.9">ibb.co/60p97Fpj</a></div>
+  </div>
+</div>
+
+  </div>  <script>
+    function copyText(){
+      navigator.clipboard?.writeText('WELCOME TO MEET PATIL').then(()=>{
+        alert('Copied!');
+      }).catch(()=>{alert('Copy failed');});
+    }
+
+    function imgFallback(img){
+      // if the direct src is a page (like ibb.co page) it may not show as image.
+      // Try constructing a likely direct image URL by converting to i.ibb.co path if possible.
+      try{
+        const pageUrl = img.src;
+        // if the url contains "ibb.co" but not "i.ibb.co", try to replace
+        if(pageUrl.includes('ibb.co') && !pageUrl.includes('i.ibb.co')){
+          // common pattern: https://ibb.co/XXXXX -> https://i.ibb.co/XXXXX/filename.jpg is unknown
+          // we'll try a simple trick: open the page in a new tab so user can get the direct image
+          img.style.display = 'none';
+          const note = document.createElement('div');
+          note.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.7)">Could not load image directly. <a href="'+pageUrl+'" target="_blank" style="color:inherit;">Open image page</a></div>';
+          img.parentNode.appendChild(note);
+        }
+      }catch(e){console.warn(e)}
+    }
+  </script></body>
+</html>
